@@ -15,9 +15,6 @@
     "storage",
     "declarativeNetRequest"
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
   "icons": {"48": "icon48.png"},
   "options_ui": {
     "page": "options.html",
