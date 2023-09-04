@@ -16,7 +16,7 @@
     "declarativeNetRequest"
   ],
   "icons": {"48": "icon48.png"},
-  "browser_action": {
+  "action": {
     "default_popup": "options.html"
   },
   "host_permissions": ["<all_urls>"],
