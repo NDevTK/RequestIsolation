@@ -4,7 +4,7 @@ let ruleIDs = [];
 let ruleDomains = [];
 
 async function updateRules() {
-    const rules = await chrome.declarativeNetRequest.getEnabledRulesets();
+    const rules = await chrome.declarativeNetRequest.getDynamicRules();
     
     for (let rule of rules) {
         ruleIDs.push(rule.id);
