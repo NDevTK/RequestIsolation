@@ -1,14 +1,24 @@
 const userinput = document.getElementById('userinput');
+const links = document.getElementById('links');
 
 let ruleIDs = [];
 let ruleDomains = [];
 
 async function updateRules() {
     const rules = await chrome.declarativeNetRequest.getDynamicRules();
-    
+
+    links.innerHTML = '';
+    ruleIDs = [];
+    ruleDomains = [];
+
     for (let rule of rules) {
         ruleIDs.push(rule.id);
-        ruleDomains.push(rule.condition.requestDomains);
+        ruleDomains.push(rule.condition.requestDomains[0]);
+        
+        let link = document.createElement('a');
+        link.href = 'https://'+rule.condition.requestDomains[0];
+        link.innerText = 'https://'+rule.condition.requestDomains[0];
+        document.body.appendChild(link);
     }
     
     userinput.value = ruleDomains.join(" ");
