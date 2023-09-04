@@ -13,11 +13,14 @@ async function updateRules() {
 
     for (let rule of rules) {
         ruleIDs.push(rule.id);
-        ruleDomains.push(rule.condition.requestDomains[0]);
+        const requestDomain = rule.condition.requestDomains[0];
+        ruleDomains.push(requestDomain);
+
+        if (requestDomain === location.host) continue
         
         let link = document.createElement('a');
-        link.href = 'https://'+rule.condition.requestDomains[0];
-        link.innerText = 'https://'+rule.condition.requestDomains[0];
+        link.href = 'https://'+requestDomain;
+        link.innerText = 'https://'+requestDomain;
         link.target = '_blank';
         links.appendChild(link);
         links.appendChild(document.createElement('br'));
@@ -45,5 +48,7 @@ async function policyUpdate() {
     await chrome.declarativeNetRequest.updateDynamicRules({addRules: [{ id: id, action: {type: 'block'}, condition: {resourceTypes: ['sub_frame', 'main_frame'], requestDomains: [domain], excludedInitiatorDomains: [domain, location.host]} }] });
     id += 1;
   }
+  // Protect extension domain
+  await chrome.declarativeNetRequest.updateDynamicRules({addRules: [{ id: id, action: {type: 'block'}, condition: {resourceTypes: ['sub_frame', 'main_frame'], requestDomains: [location.host]} }] });
   await updateRules();
 }
