@@ -1,4 +1,20 @@
-var userinput = document.getElementById('userinput');
+const userinput = document.getElementById('userinput');
+
+let ruleIDs = [];
+let ruleDomains = [];
+
+async function updateRules() {
+    const rules = await chrome.declarativeNetRequest.getEnabledRulesets();
+    
+    for (let rule of rules) {
+        ruleIDs.push(rule.id);
+        ruleDomains.push(rule.condition.requestDomains);
+    }
+    
+    userinput.value = ruleDomains.join(" ");
+}
+
+await updateRules();
 
 // User presses enter
 window.addEventListener('keyup', event => {
@@ -9,9 +25,7 @@ window.addEventListener('keyup', event => {
 });
 
 async function policyUpdate() {
-  const ruleIDs = await chrome.declarativeNetRequest.getEnabledRulesets();
   await chrome.declarativeNetRequest.updateDynamicRules({removeRuleIds: ruleIDs});
-  userinput.value.
   const domains = userinput.value.split(" ");
   let id = 1;
   for (let domain of domains) {
@@ -19,4 +33,5 @@ async function policyUpdate() {
     chrome.declarativeNetRequest.updateDynamicRules({id: id, action: {type: 'block'}, condition: {requestDomains: [domain], excludedRequestDomains: [domain]}});
     id += 1;
   }
+  await updateRules();
 }
