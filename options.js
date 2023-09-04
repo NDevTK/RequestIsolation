@@ -18,6 +18,7 @@ async function updateRules() {
         let link = document.createElement('a');
         link.href = 'https://'+rule.condition.requestDomains[0];
         link.innerText = 'https://'+rule.condition.requestDomains[0];
+        link.target = '_blank';
         document.body.appendChild(link);
     }
     
