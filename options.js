@@ -15,8 +15,6 @@ async function updateRules() {
         ruleIDs.push(rule.id);
         const requestDomain = rule.condition.requestDomains[0];
         ruleDomains.push(requestDomain);
-
-        if (requestDomain === location.host) continue
         
         let link = document.createElement('a');
         link.href = 'https://'+requestDomain;
