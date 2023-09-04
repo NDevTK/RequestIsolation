@@ -19,7 +19,8 @@ async function updateRules() {
         link.href = 'https://'+rule.condition.requestDomains[0];
         link.innerText = 'https://'+rule.condition.requestDomains[0];
         link.target = '_blank';
-        document.body.appendChild(link);
+        links.appendChild(link);
+        links.appendChild(document.createElement('br'));
     }
     
     userinput.value = ruleDomains.join(" ");
