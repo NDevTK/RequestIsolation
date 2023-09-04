@@ -14,7 +14,7 @@ async function updateRules() {
     userinput.value = ruleDomains.join(" ");
 }
 
-await updateRules();
+updateRules();
 
 // User presses enter
 window.addEventListener('keyup', event => {
