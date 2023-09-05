@@ -56,7 +56,7 @@ async function nag() {
     const allowed = await chrome.permissions.contains({origins: ['<all_urls>']});
     if (allowed) return;
     const button = document.createElement('button');
-    button.innerText = 'Include all request types';
+    button.innerText = 'Click to Include all request types :)';
     button.addEventListener('click', async () => {
         const allowed = await chrome.permissions.request({origins: ['<all_urls>']});
         if (!allowed) return;
