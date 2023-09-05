@@ -14,7 +14,7 @@
     "value": "same-origin"
   },
   "permissions": [
-    "declarativeNetRequest"
+    "declarativeNetRequestWithHostAccess"
   ],
   "icons": {"48": "icon48.png"},
   "action": {
