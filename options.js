@@ -43,6 +43,7 @@ async function policyUpdate() {
   let id = 1;
   for (let domain of domains) {
     if (domain.length < 1) continue
+    if (domain === location.host) continue
     await chrome.declarativeNetRequest.updateDynamicRules({addRules: [{ id: id, action: {type: 'block'}, condition: {resourceTypes: ['sub_frame', 'main_frame'], requestDomains: [domain], excludedInitiatorDomains: [domain, location.host]} }] });
     id += 1;
   }
