@@ -39,7 +39,7 @@ window.addEventListener('keyup', event => {
 
 async function policyUpdate() {
   await chrome.declarativeNetRequest.updateDynamicRules({removeRuleIds: ruleIDs});
-  const domains = userinput.value.split(" ");
+  const domains = [...new Set(userinput.value.split(" "))];
   let id = 1;
   for (let domain of domains) {
     if (domain.length < 1) continue
