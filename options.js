@@ -13,6 +13,7 @@ async function updateRules() {
 
     for (let rule of rules) {
         ruleIDs.push(rule.id);
+        if (domain === location.host) continue
         const requestDomain = rule.condition.requestDomains[0];
         ruleDomains.push(requestDomain);
         
