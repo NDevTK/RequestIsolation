@@ -58,10 +58,11 @@ async function nag() {
     const button = document.createElement('button');
     button.innerText = 'Include all request types';
     button.addEventListener('click', async () => {
-        const allowed = chrome.permissions.request({origins: ['<all_urls>']});
+        const allowed = await chrome.permissions.request({origins: ['<all_urls>']});
         if (!allowed) return;
         document.body.removeChild(button);
     });
+    document.body.appendChild(document.createElement('br'));
     document.body.appendChild(button);
 }
 
