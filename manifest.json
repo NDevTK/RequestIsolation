@@ -20,6 +20,6 @@
   "action": {
     "default_popup": "options.html"
   },
-  "host_permissions": ["<all_urls>"],
+  "optional_host_permissions": ["<all_urls>"],
   "manifest_version": 3
 }
