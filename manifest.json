@@ -1,6 +1,4 @@
 {
-"update_url": "https://clients2.google.com/service/update2/crx",
-
   "name": "RequestIsolation",
   "version": "1.0.0",
   "description": "Isolate requests to a certain Initiator",
