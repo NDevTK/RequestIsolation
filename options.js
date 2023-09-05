@@ -60,6 +60,7 @@ async function nag() {
     button.addEventListener('click', async () => {
         const allowed = await chrome.permissions.request({origins: ['<all_urls>']});
         if (!allowed) return;
+        policyUpdate();
         document.body.removeChild(button);
     });
     document.body.appendChild(document.createElement('br'));
