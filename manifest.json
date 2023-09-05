@@ -12,7 +12,9 @@
     "value": "same-origin"
   },
   "permissions": [
-    "storage",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "optional_permissions": [
     "declarativeNetRequest"
   ],
   "icons": {"48": "icon48.png"},
