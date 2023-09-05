@@ -1,6 +1,6 @@
 const userinput = document.getElementById('userinput');
 const links = document.getElementById('links');
-const blockTypes = "main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "webtransport", "webbundle", "other"];
+const blockTypes = ["main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "webtransport", "webbundle", "other"];
 let ruleIDs = [];
 let ruleDomains = [];
 
