@@ -14,12 +14,11 @@
     "value": "same-origin"
   },
   "permissions": [
-    "declarativeNetRequestWithHostAccess"
+    "declarativeNetRequest"
   ],
   "icons": {"48": "icon48.png"},
   "action": {
     "default_popup": "options.html"
   },
-  "optional_host_permissions": ["<all_urls>"],
   "manifest_version": 3
 }
