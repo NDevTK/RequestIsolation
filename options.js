@@ -1,6 +1,6 @@
 const userinput = document.getElementById('userinput');
 const links = document.getElementById('links');
-
+const blockTypes = "main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "webtransport", "webbundle", "other"];
 let ruleIDs = [];
 let ruleDomains = [];
 
@@ -44,10 +44,10 @@ async function policyUpdate() {
   for (let domain of domains) {
     if (domain.length < 1) continue
     if (domain === location.host) continue
-    await chrome.declarativeNetRequest.updateDynamicRules({addRules: [{ id: id, action: {type: 'block'}, condition: {resourceTypes: ['sub_frame', 'main_frame'], requestDomains: [domain], excludedInitiatorDomains: [domain, location.host]} }] });
+    await chrome.declarativeNetRequest.updateDynamicRules({addRules: [{ id: id, action: {type: 'block'}, condition: {resourceTypes: blockTypes, requestDomains: [domain], excludedInitiatorDomains: [domain, location.host]} }] });
     id += 1;
   }
   // Protect extension domain
-  await chrome.declarativeNetRequest.updateDynamicRules({addRules: [{ id: id, action: {type: 'block'}, condition: {resourceTypes: ['sub_frame', 'main_frame'], requestDomains: [location.host]} }] });
+  await chrome.declarativeNetRequest.updateDynamicRules({addRules: [{ id: id, action: {type: 'block'}, condition: {resourceTypes: blockTypes, requestDomains: [location.host]} }] });
   await updateRules();
 }
