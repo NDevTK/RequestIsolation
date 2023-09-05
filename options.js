@@ -51,3 +51,18 @@ async function policyUpdate() {
   await chrome.declarativeNetRequest.updateDynamicRules({addRules: [{ id: id, action: {type: 'block'}, condition: {resourceTypes: blockTypes, requestDomains: [location.host]} }] });
   await updateRules();
 }
+
+async function nag() {
+    const allowed = await chrome.permissions.contains({origins: ['<all_urls>']});
+    if (allowed) return;
+    const button = document.createElement('button');
+    button.innerText = 'Include all request types';
+    button.addEventListener('click', async () => {
+        const allowed = chrome.permissions.request({origins: ['<all_urls>']});
+        if (!allowed) return;
+        document.body.removeChild(button);
+    });
+    document.body.appendChild(button);
+}
+
+nag();
