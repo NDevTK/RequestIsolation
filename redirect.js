@@ -13,3 +13,16 @@ function redirecter(url, maybe_secret) {
 
     location.href = url;
 }
+
+function invalidURL(url) {
+    if (!url) return true
+    try {
+        const target = new URL(url);
+        // Prevent XSS
+        if (target.protocol === 'https:' || target.protocol === 'http:') return false
+        alert('Not allowed URL');
+    } catch {
+        alert('Invalid URL');
+    }
+    return true
+}
