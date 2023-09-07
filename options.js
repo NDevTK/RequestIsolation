@@ -70,26 +70,27 @@ function invalidURL(url) {
 function createShortcut() {
     const url = prompt('What url?');
     if (invalidURL(url)) return
+
+    let secret = localStorage.getItem('secret');
     
-    if (!localStorage.has('secret')) {
-        localStorage.setItem('secret', crypto.randomUUID());
+    if (!secret) {
+        secret = crypto.randomUUID();
+        localStorage.setItem('secret', secret);
     }
-    
-    const secret = localStorage.getItem('secret');
     
     prompt('Please use this URL', location.href + '?secret=' + localStorage.getItem('secret') + '&url=' + encodeURIComponent(url));
 }
 
 // Check if current URL is a redirect request.
-if (params.has('secret') && params.has('url') && localStorage.has('secret')) {
+if (params.has('secret') && params.has('url')) {
     redirecter(params.get('url') && params.get('secret'));
 }
 
 function redirecter(url, maybe_secret) {
-    const secret = localStorage.has('secret');
+    const secret = localStorage.getItem('secret');
+    
     // This page is not in WAR however its better to not increase the attack surface.
-    if (maybe_secret !== secret) return
-    if (invalidURL(url)) return
+    if (!secret || maybe_secret !== secret || invalidURL(url)) return
 
     location.href = url;
 }
