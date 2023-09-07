@@ -1,3 +1,4 @@
+const params = new URL(location.href).searchParams;
 const userinput = document.getElementById('userinput');
 const links = document.getElementById('links');
 const blockTypes = ["main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "webtransport", "webbundle", "other"];
@@ -51,4 +52,43 @@ async function policyUpdate() {
   // Protect extension domain
   await chrome.declarativeNetRequest.updateDynamicRules({addRules: [{ id: id, action: {type: 'block'}, condition: {resourceTypes: blockTypes, requestDomains: [location.host]} }] });
   await updateRules();
+}
+
+function invalidURL(url) {
+    if (!url) return true
+    try {
+        const target = new URL(url);
+        if (target.protocol === 'https:' || target.protocol === 'http:') return false
+        alert('Not allowed URL');
+    } catch {
+        alert('Invalid URL');
+    }
+    return true
+}
+
+function createShortcut() {
+    const url = prompt('What url?');
+    if (invalidURL(url)) return
+    
+    if (!localStorage.hasItem('secret')) {
+        localStorage.setItem('secret', crypto.randomUUID());
+    }
+    
+    const secret = localStorage.getItem('secret');
+    
+    prompt('Please use this URL', location.href + '?secret=' + localStorage.getItem('secret') + '&url=' + encodeURIComponent(url));
+}
+
+// Check if current URL is a redirect request.
+if (params.has('secret') && params.has('url') && localStorage.hasItem('secret')) {
+    redirecter(params.get('url') && params.get('secret'));
+}
+
+function redirecter(url, maybe_secret) {
+    const secret = localStorage.getItem('secret');
+    // This page is not in WAR however its better to not increase the attack surface.
+    if (maybe_secret !== secret) return
+    if (invalidURL(url)) return
+
+    location.href = url;
 }
