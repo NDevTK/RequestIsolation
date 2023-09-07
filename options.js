@@ -1,6 +1,7 @@
 const params = new URL(location.href).searchParams;
 const userinput = document.getElementById('userinput');
 const links = document.getElementById('links');
+const shortcutButton = document.getElementById('shortcutButton');
 const blockTypes = ["main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "webtransport", "webbundle", "other"];
 let ruleIDs = [];
 let ruleDomains = [];
@@ -92,3 +93,5 @@ function redirecter(url, maybe_secret) {
 
     location.href = url;
 }
+
+shortcutButton.addEventListener('click', createShortcut);
