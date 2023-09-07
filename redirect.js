@@ -1,5 +1,7 @@
 "use strict";
 
+const params = new URL(location.href).searchParams;
+
 // Check if current URL is a redirect request.
 if (params.has('secret') && params.has('url')) {
     redirecter(params.get('url'), params.get('secret'));
