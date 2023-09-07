@@ -71,7 +71,7 @@ function createShortcut() {
     const url = prompt('What url?');
     if (invalidURL(url)) return
     
-    if (!localStorage.hasItem('secret')) {
+    if (!localStorage.has('secret')) {
         localStorage.setItem('secret', crypto.randomUUID());
     }
     
@@ -81,12 +81,12 @@ function createShortcut() {
 }
 
 // Check if current URL is a redirect request.
-if (params.has('secret') && params.has('url') && localStorage.hasItem('secret')) {
+if (params.has('secret') && params.has('url') && localStorage.has('secret')) {
     redirecter(params.get('url') && params.get('secret'));
 }
 
 function redirecter(url, maybe_secret) {
-    const secret = localStorage.getItem('secret');
+    const secret = localStorage.has('secret');
     // This page is not in WAR however its better to not increase the attack surface.
     if (maybe_secret !== secret) return
     if (invalidURL(url)) return
