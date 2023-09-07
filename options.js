@@ -1,6 +1,5 @@
 "use strict";
 
-const params = new URL(location.href).searchParams;
 const userinput = document.getElementById('userinput');
 const links = document.getElementById('links');
 const shortcutButton = document.getElementById('shortcutButton');
