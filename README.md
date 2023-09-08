@@ -3,4 +3,6 @@ An experimental security extension to Isolate domains so they can only be access
 This prevents URL based reflected XSS, Timing attacks, CSRF, postMessage and clickjacking attacks.
 
 # TLDR
-self-DoS-as-a-service
+- self-DoS-as-a-service
+- well make Chrome unusable but very secure, that's gotta be worth it
+- thanks I am a good slogan generator
