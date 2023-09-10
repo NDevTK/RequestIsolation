@@ -12,8 +12,7 @@ This prevents URL based reflected XSS, Timing attacks, CSRF, postMessage and cli
 - Getting opener acesss when the isolated domain has a attacker controled link with `target=_blank` and no `rel=opener` <https://chromestatus.com/feature/6140064063029248>
 - Extensions without any permissions using chrome.tabs.create
 - This extension having a host permission
-
-
+- Pasting attacker controled URL that exploits a reflected XSS
 
 
 # TLDR
