@@ -74,7 +74,7 @@ function createShortcut() {
     if (invalidURL(url)) return
     
     const id = crypto.randomUUID();
-    localStorage.setItem('url_' + id, secret);
+    localStorage.setItem('url_' + id, url);
     
     prompt('Please use this URL', chrome.runtime.getURL('redirect.html') + '?id=' + id);
 }
