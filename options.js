@@ -72,19 +72,15 @@ function invalidURL(url) {
 function createShortcut() {
     const url = prompt('What url?');
     if (invalidURL(url)) return
-
-    let secret = localStorage.getItem('secret');
     
-    if (!secret) {
-        secret = crypto.randomUUID();
-        localStorage.setItem('secret', secret);
-    }
+    const id = crypto.randomUUID();
+    localStorage.setItem('url_' + id, url);
     
-    prompt('Please use this URL', chrome.runtime.getURL('redirect.html') + '?secret=' + localStorage.getItem('secret') + '&url=' + encodeURIComponent(url));
+    prompt('Please use this URL', chrome.runtime.getURL('redirect.html') + '?id=' + id);
 }
 
 function revokeShortcuts() {
-    localStorage.removeItem('secret');
+    localStorage.clear();
     alert('If you had any shortcuts they are now revoked the old secret will no longer work.');
 }
 
