@@ -19,3 +19,7 @@ This prevents URL based reflected XSS, Timing attacks, CSRF, postMessage and cli
 - self-DoS-as-a-service
 - well make Chrome unusable but very secure, that's gotta be worth it
 - thanks I am a good slogan generator
+
+## Security
+
+The security of this extension is taken seriously. For a detailed overview of the security model, potential considerations, and best practices, please refer to the [Security Policy](./security.md). This document is updated as the extension evolves.
